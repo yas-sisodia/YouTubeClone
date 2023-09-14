@@ -19,6 +19,13 @@ class _MainPageState extends State<MainPage> {
   }
 
   int _selectedIndex = 0;
+  List<String> listTags = [
+    "All",
+    "Union Public Service Commission",
+    "Mixes",
+    "Music",
+    "5G"
+  ];
   String timeAgo(String timeString) {
     DateTime dateTime = DateTime.parse(timeString);
     DateTime now = DateTime.now();
@@ -135,92 +142,38 @@ class _MainPageState extends State<MainPage> {
                   )
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xff5a5a5a)),
-                        child: const Text(
-                          "All",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18),
-                        ),
+              provider.isLoading == true
+                  ? SizedBox()
+                  : SizedBox(
+                      height: 25,
+                      child: ListView.builder(
+                        shrinkWrap: false,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: listTags.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: const Color(0xff5a5a5a)),
+                            child: Text(
+                              listTags[index],
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18),
+                            ),
+                          );
+                        },
                       ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xff5a5a5a)),
-                        child: const Text(
-                          "Union Public Service Commission",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xff5a5a5a)),
-                        child: const Text(
-                          "Mixes",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xff5a5a5a)),
-                        child: const Text(
-                          "Music",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xff5a5a5a)),
-                        child: const Text(
-                          "5G",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
               const SizedBox(
                 height: 10,
               ),
               provider.isLoading == true
-                  ? Align(
-                      alignment: Alignment.center,
+                  ? const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 250.0),
                       child: Center(
                         child: CircularProgressIndicator(
                           color: Colors.white,
@@ -230,12 +183,12 @@ class _MainPageState extends State<MainPage> {
                   : Consumer<MainPageProvider>(
                       builder: (context, value, child) {
                         return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: value.youTubeModel.items!.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Container(
-                              margin: EdgeInsets.symmetric(vertical: 10),
+                              margin: const EdgeInsets.symmetric(vertical: 10),
                               child: Column(
                                 children: [
                                   // Image.asset("assets/thumbnail.jpg"),
@@ -270,7 +223,7 @@ class _MainPageState extends State<MainPage> {
                                     ],
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(8),
+                                    padding: const EdgeInsets.all(8),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,

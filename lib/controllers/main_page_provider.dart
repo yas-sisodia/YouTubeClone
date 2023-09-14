@@ -20,19 +20,15 @@ class MainPageProvider extends ChangeNotifier {
   getMainPageData() async {
     try {
       http.Response response = await http.get(Uri.parse(url));
-      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print("Inside If");
         data = jsonDecode(response.body);
         // youTubeModel = YouTubeModel.fromJson(data);
         youTubeModel = YouTubeModel.fromJson(data);
         log(data.toString());
-        print("Inside Try Block");
       }
     } catch (e) {
       error = e.toString();
       log("This is error ${error}");
-      print("Inside catch block");
     }
     isLoading = false;
     notifyListeners();
